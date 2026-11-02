@@ -1,0 +1,60 @@
+{
+  "name": "deckkit",
+  "version": "0.1.0",
+  "description": "An opinionated library for animated explainer decks: a stage, a vocabulary of marks, a pacing layer, and a keyboard-driven deck shell.",
+  "type": "module",
+  "license": "MIT",
+  "author": "codingconcepts <hello@robreid.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingconcepts/deckkit.git"
+  },
+  "homepage": "https://github.com/codingconcepts/deckkit#readme",
+  "bugs": {
+    "url": "https://github.com/codingconcepts/deckkit/issues"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/deckkit.js",
+  "module": "./dist/deckkit.js",
+  "exports": {
+    ".": {
+      "import": "./dist/deckkit.js",
+      "require": "./dist/deckkit.cjs"
+    },
+    "./style.css": "./dist/deckkit.css",
+    "./src/*": "./src/*"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "palette": "node scripts/validate-palette.js",
+    "test": "node --test 'test/**/*.test.js'",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "peerDependencies": {
+    "d3": "^7.9.0",
+    "gsap": "^3.12.5"
+  },
+  "devDependencies": {
+    "d3": "^7.9.0",
+    "gsap": "^3.12.5",
+    "vite": "^5.4.11"
+  },
+  "keywords": [
+    "svg",
+    "d3",
+    "gsap",
+    "presentation",
+    "deck",
+    "animation",
+    "explainer",
+    "dataviz"
+  ]
+}

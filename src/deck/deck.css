@@ -1,0 +1,114 @@
+/* The shell around the slides.
+
+   No colours are written here. setTheme() publishes --plane, --surface,
+   --ink, --ink-2, --muted and --series-0...7, and this asks for those - so
+   the HUD and the chart can't drift apart. Before that the same six hex
+   values were written out twice, and changing a palette meant remembering
+   both. */
+
+/* The deck fills the viewport, which means the document has to let it. A
+   project that mounts into something smaller overrides this; a project that
+   mounts into <body> - which is nearly all of them - would otherwise get a
+   deck 8px short with a white margin round it. */
+html:has(.dk) { height: 100%; background: var(--plane, #0d0d0d); }
+
+.dk {
+  --dk-hud: 110px;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--plane, #0d0d0d);
+  color: var(--ink, #f0efec);
+  font: 15px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.dk *, .dk *::before, .dk *::after { box-sizing: border-box; }
+
+/* Controls hidden: the slide takes the height the HUD was using, so the
+   chart grows rather than leaving a band of empty plane behind it. */
+.dk.bare { --dk-hud: 18px; }
+.dk.bare .dk-hud { display: none; }
+.dk.bare .dk-stage { padding-bottom: 18px; }
+
+.dk-stage {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 18px 18px 0;
+}
+.dk-stage svg {
+  width: 100%;
+  max-width: calc((100vh - var(--dk-hud)) * 16 / 9);
+  max-height: calc(100vh - var(--dk-hud));
+  background: var(--surface, #1a1a19);
+  border-radius: 3px;
+}
+
+.dk-hud {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px 14px;
+  color: var(--muted, #898781);
+}
+.dk-hud button {
+  font: inherit;
+  color: var(--ink-2, #c3c2b7);
+  background: #1f1f1d;
+  border: 1px solid #33332f;
+  border-radius: 4px;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+.dk-hud button:hover { color: var(--ink, #f0efec); border-color: #4a4a44; }
+
+/* Speed menu. Opens upward because the HUD is pinned to the bottom edge -
+   a list dropping down would land off-screen. */
+.dk-menu { position: relative; display: flex; }
+.dk-menu-list {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px;
+  background: #1f1f1d;
+  border: 1px solid #3a3a36;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  z-index: 10;
+}
+.dk-menu-list[hidden] { display: none; }
+.dk-menu-list button {
+  border: 0;
+  background: transparent;
+  padding: 5px 14px;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.dk-menu-list button:hover,
+.dk-menu-list button.on { background: #2b2b27; color: var(--ink, #f0efec); }
+
+.dk-position { font-variant-numeric: tabular-nums; min-width: 46px; text-align: center; }
+.dk-label { color: var(--ink-2, #c3c2b7); min-width: 160px; }
+
+/* The scrubber borrows a series colour rather than inventing one, so a new
+   palette takes the HUD with it. */
+.dk-scrub { flex: 1; accent-color: var(--series-5, #a0c4ff); }
+
+.dk-dots { display: flex; gap: 6px; }
+.dk-dot {
+  width: 9px; height: 9px; padding: 0;
+  border-radius: 50%;
+  border: 1px solid #3a3a36;
+  background: transparent;
+  cursor: pointer;
+}
+.dk-dot.on { background: var(--ink-2, #c3c2b7); border-color: var(--ink-2, #c3c2b7); }
+.dk-keys { color: #5c5a55; font-size: 13px; }
