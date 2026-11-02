@@ -53,9 +53,9 @@ export function createDeck(opts = {}) {
   const hideButton = button("Hide", "Hide controls (h)", () => toggleControls());
 
   hud.append(
-    button("<-", "Previous (<-)", () => prev()),
+    button("←", "Previous (←)", () => prev()),
     position,
-    button("->", "Next (-> or space)", () => next()),
+    button("→", "Next (→ or space)", () => next()),
     label, dots, scrub,
     button("Replay", "Replay (r)", () => replay()),
     speedMenu, hideButton,
