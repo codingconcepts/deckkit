@@ -1,6 +1,6 @@
 {
   "name": "deckkit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An opinionated library for animated explainer decks: a stage, a vocabulary of marks, a pacing layer, and a keyboard-driven deck shell.",
   "type": "module",
   "license": "MIT",
