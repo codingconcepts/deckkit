@@ -15,7 +15,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "bin"
   ],
   "main": "./dist/deckkit.js",
   "module": "./dist/deckkit.js",
@@ -36,7 +37,8 @@
     "preview": "vite preview",
     "palette": "node scripts/validate-palette.js",
     "test": "node --test 'test/**/*.test.js'",
-    "prepublishOnly": "npm test && npm run build"
+    "prepublishOnly": "npm test && npm run build",
+    "export": "node bin/deckkit.js export"
   },
   "peerDependencies": {
     "d3": "^7.9.0",
@@ -56,5 +58,8 @@
     "animation",
     "explainer",
     "dataviz"
-  ]
+  ],
+  "bin": {
+    "deckkit": "./bin/deckkit.js"
+  }
 }

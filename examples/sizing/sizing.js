@@ -25,8 +25,8 @@ export const DAY = { domain: [0, 24], ticks: [0, 6, 12, 18, 24], format: hourTic
 // because nothing in the data knows what hardware it ran on.
 export const NODES = 5;
 export const NODE_VCPU = 16;
-export const TARGET_UTIL = 0.6;  // vCPU utilisation at the peak of the sum
-export const PRESSURE = 0.7;     // above this a node is working, not resting
+export const TARGET_UTIL = 0.4;  // vCPU utilisation at the peak of the sum
+export const PRESSURE = 0.45;     // above this a node is working, not resting
 
 /* The arithmetic this argument is made of.
 

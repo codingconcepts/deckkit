@@ -17,9 +17,9 @@
        .step(together(draw(plot), enter(name)))
        .settle();
 
-   A step is a function (tl, position) -> void. That's the whole contract,
-   so a scene with a move nothing else makes writes it inline as a closure
-   rather than waiting for the library to grow a verb for it. */
+   A step is a function (tl, position) -> void. So a scene with a move
+   nothing else makes writes it inline as a closure rather than waiting
+   for the library to grow a verb for it. */
 
 import { gsap } from "gsap";
 

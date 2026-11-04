@@ -10,6 +10,7 @@
 
 import * as d3 from "d3";
 import { W, H } from "../core/stage.js";
+import { createCapture } from "./capture.js";
 import "./deck.css";
 
 const SPEEDS = [0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
@@ -312,5 +313,18 @@ export function createDeck(opts = {}) {
 
   setSpeed(speedIndex);
   go(opening, params.get("frame") === "end" ? -1 : 1);
-  return { go, next, prev, replay, state, setSpeed, slides };
+
+  const capture = createCapture({ mount, slides, ensure, width, height });
+  const api = { go, next, prev, replay, state, setSpeed, slides, capture };
+
+  /* The handle the exporter drives the deck by.
+
+     A recorder arrives as a headless browser pointed at a URL: it has no
+     import of the deck's entry file and no reference to anything it
+     returned. A global is the only thing on the other side of that gap.
+     Last deck created wins, because a page with two decks on it isn't a
+     thing the shell supports anyway. */
+  if (typeof window !== "undefined") window.__deckkit__ = api;
+
+  return api;
 }

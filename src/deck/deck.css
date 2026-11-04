@@ -32,6 +32,23 @@ html:has(.dk) { height: 100%; background: var(--plane, #0d0d0d); }
 .dk.bare .dk-hud { display: none; }
 .dk.bare .dk-stage { padding-bottom: 18px; }
 
+/* Capture mode: the slide, and nothing else.
+
+   A frame of the exported video is the slide edge to edge - no HUD, no
+   padding, no rounded corner, no plane showing round the outside - so the
+   recorder sets its viewport to the stage's aspect and screenshots the
+   whole page rather than clipping a rectangle out of the middle of it. */
+.dk.capture { --dk-hud: 0px; }
+.dk.capture .dk-hud { display: none; }
+.dk.capture .dk-stage { padding: 0; }
+.dk.capture .dk-stage svg {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+}
+
 .dk-stage {
   flex: 1;
   display: grid;
